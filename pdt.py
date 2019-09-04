@@ -55,7 +55,7 @@ class Toplevel1:
         _ana2color = '#ececec' # Closest X11 color: 'gray92'
 
         top.geometry("924x193")
-        top.title("Docx tools")
+        top.title("POT")
         top.configure(background="#d9d9d9")
         top.configure(highlightbackground="#d9d9d9")
         top.configure(highlightcolor="black")

@@ -9,9 +9,15 @@ POT is a simple tools set for operator office document(docx,xlsx,pptx) written i
 ## Screenshots
 ![screenshot1](/screenshot/1.png)
 ## Usage
+### GUI mode
 1. Input or select docx filename
 2. Click Start button
 3. Wait few second
 4. OK!
+### command line
+  POTmaninfunc.exe sourcefile [destfile]
 
+ sourcefile: convert source file name
+
+ destfile:output filename (if destfile is blank then auto genarate file name)  
 

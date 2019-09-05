@@ -1,6 +1,8 @@
 from docx import Document
 import string
-
+import sys
+import os
+import time
 
 class docnode:
     Level = 0
@@ -11,9 +13,9 @@ class doctree:
     CurrLevel = 0
     docnodes = []
 
-    # 判断一个字符串的标题级别。
+    #Get paragraph's Level
     def JudgeParLevel(self, str):
-        if len(str) > 300:  # 太长的字符串不可能是标题，丢弃
+        if len(str) > 300:  #too long paragraph is not title.giveup it
             return 0
         a = str.split()
         if (len(a) < 2):
@@ -26,7 +28,7 @@ class doctree:
         else:
             return i
 
-    # 找出同级别编号中的最大编号
+    # get title's code
     def getLevelCode(self, nodeL):
         i = 0
         str = ''
@@ -75,7 +77,31 @@ def AutoDocxNumber(strFin, strFout):
         Doc.save(strFout)
         return 0
     except Exception as e:
-        print("error.message=：" + e)
+        print('error.message=:'+ e)
         return 1
 #AutoDocxNumber('1.docx','2.docx')
+if __name__ == '__main__':
+    if len(sys.argv) < 2:
+        print('Please input filename')
+        exit(1)
+    sfile = sys.argv[1]
+    if not (os.path.exists(sfile)):
+        print('File is not Exist')
+        exit(2)
+    if len(sys.argv) < 3:
+        spath = os.path.dirname(sfile)
+        sout = time.strftime('%Y%m%d%H%M%S', time.localtime(time.time()))+'.docx'
+        sout = os.path.join(spath, sout)
+    else:
+        sout = os.path.abspath(sys.argv[2])
+        if not (os.path.exists(os.path.dirname(sout))):
+            print(sout)
+            print('Output file path noe exists!')
+            exit(3)
+    i = AutoDocxNumber(sfile, sout)
+    if (i != 0):
+        print('Operate file fail')
+    else:
+        print('Operate file success')
+    exit(0)
 
